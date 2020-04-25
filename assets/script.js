@@ -13,6 +13,7 @@ function displayWeatherInfo(queryURL) {
     },
   }).then(function (response) {
     // Saving to local storage and increasing index
+    localStorage.setItem('lastSearch', queryURL);
     var alreadyInHistory = 0;
     for (i = 0; i < localStorage.length; i++) {
       var historyItem = localStorage.getItem(localStorage.key(i));
@@ -75,4 +76,8 @@ $(function () {
     $('#search-form').show();
     $('#show-search-button').hide();
   });
+  // Showing last search/history item on page load
+  !localStorage.getItem('lastSearch')
+    ? ''
+    : displayWeatherInfo(localStorage.getItem('lastSearch'));
 });
