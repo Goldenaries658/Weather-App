@@ -17,6 +17,10 @@ nav,
     font-size: 1.8em;
 }
 
+.city-date-container{
+ display: inline-grid;
+}
+
 small {
   text-align: center;
   display: block;
