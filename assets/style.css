@@ -13,6 +13,10 @@ nav,
   line-height: 1.2;
 }
 
+.lead {
+    font-size: 1.8em;
+}
+
 small {
   text-align: center;
   display: block;

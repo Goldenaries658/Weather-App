@@ -47,7 +47,7 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="./highscores.html">Highscores</a>
+            <a class="nav-link" href="./history.html">History</a>
           </li>
         </ul>
       </div>
@@ -58,17 +58,33 @@
     <div class="container">
       <div class="jumbotron">
         <h1 class="display-3">Weather Dashboard.</h1>
-        <p class="lead">
-          Enter City info here:
-        </p>
         <hr class="my-4" />
 
         <br />
-
-        <p class="lead">
-          <a class="btn btn-primary btn-lg" role="button">Start</a>
-        </p>
+        <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-sm-12 col-md-6">
+            <form>
+              <fieldset>
+                <div class="form-group">
+                  <label for="city-input" class="lead">City:</label
+                  ><input
+                    type="text"
+                    class="form-control"
+                    id="city-input"
+                    placeholder="Enter city name here"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </fieldset>
+              <p id="city-name" class="lead"></p>
+            </form>
+          </div>
+          <!-- Closing form column -->
+        </div>
+        <!-- Closing first row -->
       </div>
+      <!-- Closing jumbotron -->
     </div>
 
     <footer>
