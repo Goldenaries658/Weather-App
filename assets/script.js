@@ -10,6 +10,13 @@ $(function () {
     $.ajax({
       url: queryURL,
       method: 'GET',
+      error: function (xhr, ajaxOptions, thrownError) {
+        if (xhr.status == 400){
+            alert('400: Invalid Input.')
+        } else if(xhr.status == 404) {
+            alert('404: Not Found.')
+        }
+      },
     }).then(function (response) {
       console.log(response);
     });
