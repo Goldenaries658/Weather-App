@@ -15,6 +15,7 @@ nav,
 
 small {
   text-align: center;
+  display: block;
 }
 
 footer {
