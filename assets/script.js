@@ -54,11 +54,25 @@ function displayWeatherInfo(queryURL) {
       response.coord.lon +
       '&lon=' +
       response.coord.lat;
+
     $.ajax({
       url: uvQueryURL,
       method: 'GET',
     }).then(function (response) {
-      $('#uv').text('UV Index: ' + response.value);
+      var uvi = response.value
+        $('#uv').text('UV Index: ' + uvi);
+      
+      if (uvi < 3) {
+        $('#uv').css('color', 'green');
+      } else if (uvi < 6) {
+        $('#uv').css('color', 'yellow');
+      } else if (uvi < 8) {
+        $('#uv').css('color', 'orange');
+      } else if (uvi < 11) {
+        $('#uv').css('color', 'red');
+      } else {
+        $('#uv').css('color', 'violet');
+      }
     });
   });
 }
@@ -95,17 +109,30 @@ function displayForecastInfo(fiveDayQueryURL) {
       $('#forecast-temp' + i).text(temp.toFixed(2) + ' °C');
       $('#forecast-humidity' + i).text('Humidity: ' + humidity);
       $('#forecast-wind-speed' + i).text('Windspeed: ' + windSpeed);
-      
 
-      function uvIndex(i){
-          $.ajax({
-              url: uvQueryURL,
-              method: 'GET',
-            }).then(function (response) {
-                $('#forecast-uv'+ i).text('UV Index: ' + response[i].value);
-            });
-        }
-        uvIndex(i);
+      function uvIndex(i) {
+        $.ajax({
+          url: uvQueryURL,
+          method: 'GET',
+        }).then(function (response) {
+          var uvi = response[i].value;
+          var uvDisplay = '#forecast-uv' + i;
+          $(uvDisplay).text('UV Index: ' + uvi);
+
+          if (uvi < 3) {
+            $(uvDisplay).css('color', 'green');
+          } else if (uvi < 6) {
+            $(uvDisplay).css('color', 'yellow');
+          } else if (uvi < 8) {
+            $(uvDisplay).css('color', 'orange');
+          } else if (uvi < 11) {
+            $(uvDisplay).css('color', 'red');
+          } else {
+            $(uvDisplay).css('color', 'violet');
+          }
+        });
+      }
+      uvIndex(i);
     }
   });
 }
