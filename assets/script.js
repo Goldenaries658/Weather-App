@@ -26,7 +26,17 @@ function displayWeatherInfo(queryURL) {
         alert('404: Not Found.');
       }
     },
-  }).then(function (response) {
+}).then(function (response) {
+    // Setting all variables
+    var name = response.name;
+    var icon =
+      'http://openweathermap.org/img/wn/' +
+      response.weather[0].icon +
+      '@2x.png';
+    var temp = response.main.temp - 273.15;
+    var humidity = response.main.humidity + '%';
+    var windSpeed = response.wind.speed + ' m/s';
+
     // Checking for matching entries in local storage
     var alreadyInHistory = 0;
     for (i = 0; i < localStorage.length; i++) {
@@ -39,7 +49,7 @@ function displayWeatherInfo(queryURL) {
     // Saving to local storage if no matching entries are found
     if (alreadyInHistory == 0) {
       var index = parseInt(localStorage.getItem('index'));
-      localStorage.setItem(index, queryURL);
+      localStorage.setItem(index, name);
       localStorage.setItem('index', index + 1);
     }
     // Saving to local storage and increasing index
@@ -49,15 +59,6 @@ function displayWeatherInfo(queryURL) {
     $('#search-form').hide();
     $('#show-search-button').show();
 
-    // Setting all variables
-    var name = response.name;
-    var icon =
-      'http://openweathermap.org/img/wn/' +
-      response.weather[0].icon +
-      '@2x.png';
-    var temp = response.main.temp - 273.15;
-    var humidity = response.main.humidity + '%';
-    var windSpeed = response.wind.speed + ' m/s';
 
     // Setting Display values
     $('#city-name').text(name);
