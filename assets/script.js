@@ -157,20 +157,6 @@ $(function () {
     displayWeatherInfo(queryURL);
     displayForecastInfo(forecastQueryURL);
   });
-
-  // Toggling Forecast
-  var forecast = true;
-  $('#forecast-toggle').on('click', function () {
-    if (forecast) {
-      $('#forecast-container').hide();
-      $(this).attr('class', 'btn btn-primary')
-      forecast = false;
-    } else {
-        $('#forecast-container').show();
-        $(this).attr('class', 'btn btn-light')
-        forecast = true;
-    }
-  });
   // Displaying search
   $('#show-search-button').on('click', function (e) {
     e.preventDefault();
@@ -180,9 +166,21 @@ $(function () {
   // Showing last search/history item on page load
   if (!localStorage.getItem('lastSearch')) {
     $('#current-info').hide();
-    forecast = false;
   } else {
     displayWeatherInfo(localStorage.getItem('lastSearch'));
     displayForecastInfo(localStorage.getItem('lastForecast'));
   }
+  // Toggling Forecast
+  var forecast = false;
+  $('#forecast-toggle').on('click', function () {
+    if (forecast) {
+      $('#forecast-container').hide();
+      $(this).attr('class', 'btn btn-primary');
+      forecast = false;
+    } else {
+      $('#forecast-container').show();
+      $(this).attr('class', 'btn btn-light');
+      forecast = true;
+    }
+  });
 });
