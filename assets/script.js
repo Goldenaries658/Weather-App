@@ -83,11 +83,13 @@ function displayWeatherInfo(queryURL) {
 }
 
 // Setting next 5 days forecast
-function displayForecastInfo(fiveDayQueryURL) {
-  $('#forecast-container').show();
+function displayForecastInfo(forecastQueryURL) {
+  // Setting forecast URL to local storage
+  localStorage.setItem('lastForecast', forecastQueryURL);
 
+  // Ajax call to OWM API for forecast data
   $.ajax({
-    url: fiveDayQueryURL,
+    url: forecastQueryURL,
     method: 'GET',
   }).then(function (response) {
     // Looping through the forecast displays
@@ -142,12 +144,12 @@ $(function () {
       'http://api.openweathermap.org/data/2.5/weather?q=' +
       city +
       '&appid=23cadb273565bbb0f7aaa7a5b98a990a';
-    var fiveDayQueryURL =
+    var forecastQueryURL =
       'http://api.openweathermap.org/data/2.5/forecast?q=' +
       city +
       '&appid=23cadb273565bbb0f7aaa7a5b98a990a';
     displayWeatherInfo(queryURL);
-    displayForecastInfo(fiveDayQueryURL);
+    displayForecastInfo(forecastQueryURL);
   });
 
   // Displaying search
@@ -157,7 +159,9 @@ $(function () {
     $('#show-search-button').hide();
   });
   // Showing last search/history item on page load
-  !localStorage.getItem('lastSearch')
-    ? ''
-    : displayWeatherInfo(localStorage.getItem('lastSearch'));
+  if (!localStorage.getItem('lastSearch')) {
+  } else {
+    displayWeatherInfo(localStorage.getItem('lastSearch'));
+    displayForecastInfo(localStorage.getItem('lastForecast'));
+  }
 });
