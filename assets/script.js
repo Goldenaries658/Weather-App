@@ -72,7 +72,7 @@ function displayForecastInfo(fiveDayQueryURL) {
     method: 'GET',
   }).then(function (response) {
     // Looping through the forecast displays
-    for (i = 1, a = 7; i < 6; i++, a += 8) {
+    for (i = 0, a = 7; i < 5; i++, a += 8) {
       response.list[a];
       // Setting all variables
       var date = moment(response.list[a].dt_txt).format('MMMM Do YYYY');
@@ -84,12 +84,10 @@ function displayForecastInfo(fiveDayQueryURL) {
       var humidity = response.list[a].main.humidity + '%';
       var windSpeed = response.list[a].wind.speed + ' m/s';
       var uvQueryURL =
-        'http://api.openweathermap.org/data/2.5/uvi?appid=23cadb273565bbb0f7aaa7a5b98a990a&lat=' +
+        'http://api.openweathermap.org/data/2.5/uvi/forecast?appid=23cadb273565bbb0f7aaa7a5b98a990a&lat=' +
         response.city.coord.lat +
         '&lon=' +
         response.city.coord.lon;
-        console.log(response)
-        console.log(response.city)
 
       // Setting Display values
       $('#forecast-date' + i).text(date);
@@ -97,13 +95,17 @@ function displayForecastInfo(fiveDayQueryURL) {
       $('#forecast-temp' + i).text(temp.toFixed(2) + ' °C');
       $('#forecast-humidity' + i).text('Humidity: ' + humidity);
       $('#forecast-wind-speed' + i).text('Windspeed: ' + windSpeed);
-      $('#forecast-uv' + i).text('UV Index: ' + uv);
-      $.ajax({
-        url: uvQueryURL,
-        method: 'GET',
-      }).then(function (response) {
-        $('#uv').text('UV Index: ' + response.value);
-      });
+      
+
+      function uvIndex(i){
+          $.ajax({
+              url: uvQueryURL,
+              method: 'GET',
+            }).then(function (response) {
+                $('#forecast-uv'+ i).text('UV Index: ' + response[i].value);
+            });
+        }
+        uvIndex(i);
     }
   });
 }
