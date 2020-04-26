@@ -27,21 +27,23 @@ function displayWeatherInfo(queryURL) {
       }
     },
   }).then(function (response) {
-    // Saving to local storage and increasing index
-    localStorage.setItem('lastSearch', queryURL);
+    // Checking for matching entries in local storage
     var alreadyInHistory = 0;
     for (i = 0; i < localStorage.length; i++) {
       var historyItem = localStorage.getItem(localStorage.key(i));
       if (queryURL == historyItem) {
-        alreadyInHistory = 1;
+        alreadyInHistory += 1;
       }
     }
-
-    if (!alreadyInHistory) {
-      var index = localStorage.getItem('index');
+    
+    // Saving to local storage if no matching entries are found
+    if ((alreadyInHistory == 0)) {
+      var index = parseInt(localStorage.getItem('index'));
       localStorage.setItem(index, queryURL);
-      localStorage.setItem('index', parseInt(index) + 1);
+      localStorage.setItem('index', index + 1);
     }
+    // Saving to local storage and increasing index
+    localStorage.setItem('lastSearch', queryURL);
 
     // Hiding the search box
     $('#search-form').hide();
@@ -135,8 +137,10 @@ function displayForecastInfo(forecastQueryURL) {
 
 $(function () {
   // Setting an index for history entries.
-  !localStorage.getItem('index') ? '' : localStorage.setItem('index', 0);
-
+  //   !(localStorage.getItem('index')) ? '' : localStorage.setItem('index', 0);
+  if (localStorage.getItem('index') == null) {
+    localStorage.setItem('index', 0);
+  }
   $('#submit-button').on('click', function (event) {
     event.preventDefault();
     var city = $('#city-input').val();
