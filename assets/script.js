@@ -35,9 +35,9 @@ function displayWeatherInfo(queryURL) {
         alreadyInHistory += 1;
       }
     }
-    
+
     // Saving to local storage if no matching entries are found
-    if ((alreadyInHistory == 0)) {
+    if (alreadyInHistory == 0) {
       var index = parseInt(localStorage.getItem('index'));
       localStorage.setItem(index, queryURL);
       localStorage.setItem('index', index + 1);
@@ -137,12 +137,14 @@ function displayForecastInfo(forecastQueryURL) {
 
 $(function () {
   // Setting an index for history entries.
-  //   !(localStorage.getItem('index')) ? '' : localStorage.setItem('index', 0);
   if (localStorage.getItem('index') == null) {
     localStorage.setItem('index', 0);
   }
+
+  // Submitting search
   $('#submit-button').on('click', function (event) {
     event.preventDefault();
+    $('#current-info').show();
     var city = $('#city-input').val();
     var queryURL =
       'http://api.openweathermap.org/data/2.5/weather?q=' +
@@ -156,6 +158,19 @@ $(function () {
     displayForecastInfo(forecastQueryURL);
   });
 
+  // Toggling Forecast
+  var forecast = true;
+  $('#forecast-toggle').on('click', function () {
+    if (forecast) {
+      $('#forecast-container').hide();
+      $(this).attr('class', 'btn btn-primary')
+      forecast = false;
+    } else {
+        $('#forecast-container').show();
+        $(this).attr('class', 'btn btn-light')
+        forecast = true;
+    }
+  });
   // Displaying search
   $('#show-search-button').on('click', function (e) {
     e.preventDefault();
@@ -163,7 +178,10 @@ $(function () {
     $('#show-search-button').hide();
   });
   // Showing last search/history item on page load
-  if (!!localStorage.getItem('lastSearch')) {
+  if (!localStorage.getItem('lastSearch')) {
+    $('#current-info').hide();
+    forecast = false;
+  } else {
     displayWeatherInfo(localStorage.getItem('lastSearch'));
     displayForecastInfo(localStorage.getItem('lastForecast'));
   }
