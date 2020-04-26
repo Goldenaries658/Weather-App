@@ -3,9 +3,25 @@ var index = parseInt(localStorage.getItem('index'));
 $(function () {
   for (i = 0; i < index; i++) {
     var historyItem =
-      '<li class="list-group-item d-flex justify-content-between align-items-center">' +
+      '<a href="#" class="history-item list-group-item list-group-item-action">' +
       localStorage.getItem(i) +
-      '</li>';
+      '</a>';
     $('#history-list').append(historyItem);
   }
+
+  $('.history-item').on('click', function () {
+    var selection = $(this).text();
+    var queryURL =
+      'http://api.openweathermap.org/data/2.5/weather?q=' +
+      selection +
+      '&appid=23cadb273565bbb0f7aaa7a5b98a990a';
+    var forecastQueryURL =
+      'http://api.openweathermap.org/data/2.5/forecast?q=' +
+      selection +
+      '&appid=23cadb273565bbb0f7aaa7a5b98a990a';
+
+    localStorage.setItem('lastSearch', queryURL);
+    localStorage.setItem('lastForecast', queryURL);
+    location.href = 'index.html';
+  });
 });
