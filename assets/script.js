@@ -159,8 +159,7 @@ $(function () {
     $('#show-search-button').hide();
   });
   // Showing last search/history item on page load
-  if (!localStorage.getItem('lastSearch')) {
-  } else {
+  if (!!localStorage.getItem('lastSearch')) {
     displayWeatherInfo(localStorage.getItem('lastSearch'));
     displayForecastInfo(localStorage.getItem('lastForecast'));
   }
