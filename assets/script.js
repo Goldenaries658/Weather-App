@@ -1,3 +1,18 @@
+// Setting UV index colour
+function uvColour(element, uvi) {
+  if (uvi < 3) {
+    $(element).css('color', 'green');
+  } else if (uvi < 6) {
+    $(element).css('color', 'yellow');
+  } else if (uvi < 8) {
+    $(element).css('color', 'orange');
+  } else if (uvi < 11) {
+    $(element).css('color', 'red');
+  } else {
+    $(element).css('color', 'violet');
+  }
+}
+
 // Function to display weather info
 function displayWeatherInfo(queryURL) {
   // Calling the Open Weather Map API for current info
@@ -59,20 +74,10 @@ function displayWeatherInfo(queryURL) {
       url: uvQueryURL,
       method: 'GET',
     }).then(function (response) {
-      var uvi = response.value
-        $('#uv').text('UV Index: ' + uvi);
-      
-      if (uvi < 3) {
-        $('#uv').css('color', 'green');
-      } else if (uvi < 6) {
-        $('#uv').css('color', 'yellow');
-      } else if (uvi < 8) {
-        $('#uv').css('color', 'orange');
-      } else if (uvi < 11) {
-        $('#uv').css('color', 'red');
-      } else {
-        $('#uv').css('color', 'violet');
-      }
+      var uvi = response.value;
+      $('#uv').text('UV Index: ' + uvi);
+      // Setting UV index colour
+      uvColour('#uv', uvi);
     });
   });
 }
@@ -118,18 +123,7 @@ function displayForecastInfo(fiveDayQueryURL) {
           var uvi = response[i].value;
           var uvDisplay = '#forecast-uv' + i;
           $(uvDisplay).text('UV Index: ' + uvi);
-
-          if (uvi < 3) {
-            $(uvDisplay).css('color', 'green');
-          } else if (uvi < 6) {
-            $(uvDisplay).css('color', 'yellow');
-          } else if (uvi < 8) {
-            $(uvDisplay).css('color', 'orange');
-          } else if (uvi < 11) {
-            $(uvDisplay).css('color', 'red');
-          } else {
-            $(uvDisplay).css('color', 'violet');
-          }
+          uvColour(uvDisplay, uvi);
         });
       }
       uvIndex(i);
