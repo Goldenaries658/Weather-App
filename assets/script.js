@@ -39,9 +39,10 @@ function displayWeatherInfo(queryURL) {
 
     // Checking for matching entries in local storage
     var alreadyInHistory = 0;
-    for (i = 0; i < localStorage.length; i++) {
-      var historyItem = localStorage.getItem(localStorage.key(i));
-      if (queryURL == historyItem) {
+    var index = parseInt(localStorage.getItem('index'));
+    for (i = 0; i < index; i++) {
+      var historyItem = localStorage.getItem(i);
+      if (name == historyItem) {
         alreadyInHistory += 1;
       }
     }
