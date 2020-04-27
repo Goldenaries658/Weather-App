@@ -3,9 +3,7 @@ var index = parseInt(localStorage.getItem('index'));
 $(function () {
   for (i = 0; i < index; i++) {
     var historyItem =
-      '<a href="#" class="history-item list-group-item list-group-item-action">' +
-      localStorage.getItem(i) +
-      '</a>';
+      `<a href=\"#\" class=\"history-item list-group-item list-group-item-action\">${localStorage.getItem(i)}<i class=\"far fa-trash-alt\"></i></a>`;
     $('#history-list').append(historyItem);
   }
 

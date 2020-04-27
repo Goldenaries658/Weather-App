@@ -25,6 +25,12 @@ nav,
   display: inline-grid;
 }
 
+i {
+  position: absolute;
+  right: 20px;
+  bottom: 34%;
+}
+
 small {
   text-align: center;
   display: block;
