@@ -2,6 +2,8 @@
 ## Summary
 A simple weather forecasting webapp, it allows a user to search locations and receive up to 5 days forecast for the location. It also features an editable history.
 
+## [Demo](https://goldenaries658.github.io/Weather-App/)
+
 ## Main Features
 * [Dashboard](#dashboard)
   1. [Search Box](#search-box)
