@@ -30,7 +30,7 @@ function displayWeatherInfo(queryURL) {
     // Setting all variables
     var name = response.name;
     var icon =
-      'http://openweathermap.org/img/wn/' +
+      'https://openweathermap.org/img/wn/' +
       response.weather[0].icon +
       '@2x.png';
     var temp = response.main.temp - 273.15;
@@ -69,7 +69,7 @@ function displayWeatherInfo(queryURL) {
     $('#humidity').text('Humidity: ' + humidity);
     $('#wind-speed').text('Windspeed: ' + windSpeed);
     var uvQueryURL =
-      'http://api.openweathermap.org/data/2.5/uvi?appid=23cadb273565bbb0f7aaa7a5b98a990a&lat=' +
+      'https://api.openweathermap.org/data/2.5/uvi?appid=23cadb273565bbb0f7aaa7a5b98a990a&lat=' +
       response.coord.lon +
       '&lon=' +
       response.coord.lat;
@@ -102,14 +102,14 @@ function displayForecastInfo(forecastQueryURL) {
       // Setting all variables
       var date = moment(response.list[a].dt_txt).format('MMMM Do YYYY');
       var icon =
-        'http://openweathermap.org/img/wn/' +
+        'https://openweathermap.org/img/wn/' +
         response.list[a].weather[0].icon +
         '@2x.png';
       var temp = response.list[a].main.temp - 273.15;
       var humidity = response.list[a].main.humidity + '%';
       var windSpeed = response.list[a].wind.speed + ' m/s';
       var uvQueryURL =
-        'http://api.openweathermap.org/data/2.5/uvi/forecast?appid=23cadb273565bbb0f7aaa7a5b98a990a&lat=' +
+        'https://api.openweathermap.org/data/2.5/uvi/forecast?appid=23cadb273565bbb0f7aaa7a5b98a990a&lat=' +
         response.city.coord.lat +
         '&lon=' +
         response.city.coord.lon;
@@ -149,11 +149,11 @@ $(function () {
     $('#current-info').show();
     var city = $('#city-input').val();
     var queryURL =
-      'http://api.openweathermap.org/data/2.5/weather?q=' +
+      'https://api.openweathermap.org/data/2.5/weather?q=' +
       city +
       '&appid=23cadb273565bbb0f7aaa7a5b98a990a';
     var forecastQueryURL =
-      'http://api.openweathermap.org/data/2.5/forecast?q=' +
+      'https://api.openweathermap.org/data/2.5/forecast?q=' +
       city +
       '&appid=23cadb273565bbb0f7aaa7a5b98a990a';
     displayWeatherInfo(queryURL);

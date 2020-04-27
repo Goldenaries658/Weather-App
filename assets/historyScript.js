@@ -16,11 +16,11 @@ $(function () {
   $('.history-item').on('click', function () {
     var selection = $(this).text();
     var queryURL =
-      'http://api.openweathermap.org/data/2.5/weather?q=' +
+      'https://api.openweathermap.org/data/2.5/weather?q=' +
       selection +
       '&appid=23cadb273565bbb0f7aaa7a5b98a990a';
     var forecastQueryURL =
-      'http://api.openweathermap.org/data/2.5/forecast?q=' +
+      'https://api.openweathermap.org/data/2.5/forecast?q=' +
       selection +
       '&appid=23cadb273565bbb0f7aaa7a5b98a990a';
 
