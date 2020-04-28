@@ -25,7 +25,7 @@ $(function () {
       '&appid=23cadb273565bbb0f7aaa7a5b98a990a';
 
     localStorage.setItem('lastSearch', queryURL);
-    localStorage.setItem('lastForecast', queryURL);
+    localStorage.setItem('lastForecast', forecastQueryURL);
     location.href = 'index.html';
   });
 
