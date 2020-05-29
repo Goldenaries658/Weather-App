@@ -18,7 +18,7 @@ A simple weather forecasting webapp, it allows a user to search locations and re
 A text input for the user to enter their query, this hides automatically when searching and displays a search button that makes it visible again. When a user searches for an item the query is evaluated against the existing history and saved if not already present. It then loads both current and forecasted weather data.
 
 ### Current Weather Info
-This displays the users last search or a selected history item on page load. If none are present then the earch box will be displayed. When a search is passed to this display the text is updated to reflect current info, it also then has a button to toggle the forecast info. The UV Index info was retreived from a different URL using Lat & Lon values retreived from the current weather data
+This displays the users last search or a selected history item on page load. If none are present then the search box will be displayed. When a search is passed to this display the text is updated to reflect current info, it also then has a button to toggle the forecast info. The UV Index info was retrieved from a different URL using Lat & Lon values retrieved from the current weather data
 
 ### Forecast Info
 This is the 5 day forecast, it functions the same as the current info but using a different query URL
